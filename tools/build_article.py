@@ -153,6 +153,7 @@ def build(src, brand):
 
 <div class="foot">© {html.escape(brand)}</div>
 </div>
+<script src="assets/fit.js"></script>
 </body>
 </html>
 """, warns
