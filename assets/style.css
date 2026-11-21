@@ -52,4 +52,4 @@ p.key{font-weight:bold;color:var(--accent);font-size:calc(var(--fs)*1.0625);marg
 .note{text-align:center;font-size:calc(var(--fs)*.875);color:var(--muted);margin:36px 0 -14px}
 .foot{text-align:center;color:var(--muted);font-size:12px;margin-top:64px}
 
-.cover{display:block;width:68%;height:auto;margin:4px auto 22px;border-radius:6px}
+.cover{display:block;width:calc(100% + 36px);max-width:none;height:auto;margin:-40px -18px 24px}
