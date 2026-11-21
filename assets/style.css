@@ -1,11 +1,11 @@
 /* 全ページ共通デザイン。見た目を変えたいときはここだけ直す */
 :root{
-  --bg:#fbf8f6;
-  --text:#2a2326;
-  --muted:#8a7f84;
+  --bg:#fcf1f1;
+  --text:#2b1c20;
+  --muted:#8c7378;
   --accent:#b3122b;      /* 深紅（表紙画像の赤に合わせる） */
-  --accent-soft:#fbe9ea;
-  --line:#eadcdd;
+  --accent-soft:#f8dcdf;
+  --line:#ecd3d6;
   --font:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",sans-serif;
 }
 *{box-sizing:border-box}
