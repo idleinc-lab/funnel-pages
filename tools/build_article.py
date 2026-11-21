@@ -26,32 +26,39 @@ import re, sys, html, pathlib
 MAIN_CAP, BOX_CAP, MAX_LINES = 17, 15, 4
 
 
+TERM = ("。", "」", "！", "？", "…")
+
+
 def split_groups(lines):
+    """最大4行ごとに分割。文の終わり(。」！？…)で切れる案を最優先、無ければ読点、最後に文中。"""
     n = len(lines)
     if n <= MAX_LINES:
         return [lines]
-    k = -(-n // MAX_LINES)
-    sizes = [n // k + (1 if i < n % k else 0) for i in range(k)]
-    cuts, c = [], 0
-    for sz in sizes[:-1]:
-        c += sz
-        cuts.append(c)
-    good = lambda i: lines[i - 1].rstrip().endswith(("。", "」", "！", "？", "…"))
-    new, prev = [], 0
-    for idx, c in enumerate(cuts):
-        best = c
-        for d in (0, -1, 1):
-            cc = c + d
-            if cc > prev and cc - prev <= MAX_LINES and cc < n and good(cc) and (n - cc) <= MAX_LINES * (len(cuts) - idx):
-                best = cc
-                break
-        new.append(best)
-        prev = best
-    groups, a = [], 0
-    for b in new + [n]:
-        groups.append(lines[a:b])
-        a = b
-    return groups
+
+    def bcost(i):  # i行目の後ろで切るコスト
+        t = lines[i - 1].rstrip()
+        return 0 if t.endswith(TERM) else 4 if t.endswith("、") else 9
+
+    def gcost(sz):
+        return 1 + {1: 3, 2: 0.5, 3: 0, 4: 0.3}[sz]
+
+    INF = float("inf")
+    best = [(INF, 0)] * (n + 1)
+    best[0] = (0, 0)
+    for j in range(1, n + 1):
+        for sz in range(1, MAX_LINES + 1):
+            i = j - sz
+            if i < 0 or best[i][0] == INF:
+                continue
+            c = best[i][0] + gcost(sz) + (bcost(j) if j < n else 0)
+            if c < best[j][0]:
+                best[j] = (c, i)
+    groups, j = [], n
+    while j > 0:
+        i = best[j][1]
+        groups.append(lines[i:j])
+        j = i
+    return groups[::-1]
 
 
 def para(lines, cap, warns, cls=""):
