@@ -1,10 +1,9 @@
-# ワーク用フォームのURL（名前=URL）。LINE Harnessのアンケートに差し替えるときはここだけ直して再生成する
-# いまは暫定で宴の旧フォームのまま
-roadmap=https://utage-system.com/f/XZq5Si7GNCh6
-day1=https://utage-system.com/f/eMStyesBCBal
-day2=https://utage-system.com/f/f6XK1CTRPsJP
-day3=https://utage-system.com/f/cjfbhCVajJKn
-day4=https://utage-system.com/f/7cqOBMCtiwSb
-day5=https://utage-system.com/f/OA4CWIeMsES1
-day6=https://utage-system.com/f/4936FSpbsEt1
-day7=https://utage-system.com/f/shzZm44XxTpQ
+# ワーク用フォームのURL（名前=URL）。LINE Harness(LIFF)のフォーム。差し替えるときはここだけ直して再生成する
+roadmap=https://liff.line.me/2012444435-QhR3Y0SH?page=form&id=0678053f-4712-42f3-a16f-461d5ead4ad5
+day1=https://liff.line.me/2012444435-QhR3Y0SH?page=form&id=c176b3f5-01f7-4cf9-9f3c-83dd7c8b5904
+day2=https://liff.line.me/2012444435-QhR3Y0SH?page=form&id=d40276c6-7113-4e12-a160-85b3ee333b27
+day3=https://liff.line.me/2012444435-QhR3Y0SH?page=form&id=7886c5d0-6dc6-4c94-87af-3c0cd7c3c1ad
+day4=https://liff.line.me/2012444435-QhR3Y0SH?page=form&id=ce0a0173-efbb-481c-8524-fe8ac6d212e0
+day5=https://liff.line.me/2012444435-QhR3Y0SH?page=form&id=a8b623bf-4969-457a-9e15-8fd226f37b87
+day6=https://liff.line.me/2012444435-QhR3Y0SH?page=form&id=79239e31-c531-4ea5-8c83-2bbefc70d9f3
+day7=https://liff.line.me/2012444435-QhR3Y0SH?page=form&id=0daf866b-230d-42be-8292-7b667df8cc75
