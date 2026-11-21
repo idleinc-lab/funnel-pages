@@ -4,7 +4,7 @@
 使い方:  python3 tools/build_article.py 原稿.txt 出力名.html [--brand ケイ]
 
 原稿の書き方（1行=1フレーズ。ここで区切った位置がそのまま改行になる）
-  # タイトル             h1
+  # タイトル             h1（「/」で意味のまとまりごとに改行。見出し・!key・!noteも同様）
   ## 見出し              h2
   ### 小見出し           h3
   !lead 小さなキャッチ    h1の上の薄字
@@ -65,7 +65,60 @@ def split_groups(lines):
     return groups[::-1]
 
 
+KINSOKU = set("、。」』）)…！？ー々ぁぃぅぇぉゃゅょっ")
+PARTICLES = set("はがをにでとものへ")
+
+
+def _bcost(line, i):
+    """line を i 文字目で切るときの不自然さ（小さいほど良い）"""
+    prev, nxt = line[i - 1], line[i]
+    if nxt in KINSOKU or prev in "「『（(":
+        return 100
+    # 括弧の内側で切る場合は少し不利
+    depth = line[:i].count("「") - line[:i].count("」") + line[:i].count("（") - line[:i].count("）")
+    pen = 2 if depth > 0 else 0
+    if prev in "、。":
+        return pen
+    if prev in "」』）)" or nxt in "「『（(":
+        return pen + 1
+    if prev + nxt in ("もう", "とい", "でき", "にも", "では", "には", "とは", "まで", "ので", "のに", "ない", "なら", "こと", "もの", "ため", "から", "より", "ほど"):
+        return pen + 30 if prev + nxt not in ("では", "には", "とは") else pen + 4
+    if prev in PARTICLES and nxt not in PARTICLES:
+        return pen + 3
+    if prev in "てしたり":
+        return pen + 6
+    return pen + 30
+
+
+def auto_split(line, cap):
+    """cap を超える行を、文節の切れ目（読点・助詞・括弧の前後）でできるだけ均等に分割する。"""
+    n = len(line)
+    if n <= cap:
+        return [line]
+    k = -(-n // cap)
+    ideal = n / k
+    best, bc = None, 1e9
+    for i in range(max(1, n - cap * (k - 1) if k > 1 else 1), min(cap, n - 1) + 1):
+        left = line[:i]
+        if len(left) > cap:
+            continue
+        c = _bcost(line, i) + 0.6 * abs(i - ideal)
+        if i < 3 or n - i < 3:
+            c += 20
+        if c < bc:
+            best, bc = i, c
+    if best is None:
+        best = cap
+    return [line[:best]] + auto_split(line[best:], cap)
+
+
+def brs(t):
+    """見出し・強調行の「/」を改行(<br>)にする"""
+    return html.escape(t, quote=False).replace("/", "<br>")
+
+
 def para(lines, cap, warns, cls=""):
+    lines = [x for l in lines for x in auto_split(l, cap)]
     for l in lines:
         if len(l) > cap:
             warns.append(f"{len(l)}字 > {cap}: {l}")
@@ -112,17 +165,17 @@ def build(src, brand):
             flush(cap)
             lv = len(m.group(1))
             if lv == 1:
-                title = m.group(2)
-            out.append(f"<h{lv}>{html.escape(m.group(2))}</h{lv}>")
+                title = m.group(2).replace("/", "")
+            out.append(f"<h{lv}>{brs(m.group(2))}</h{lv}>")
             continue
         if line.startswith("!lead "):
             flush(cap); out.append(f'<p class="lead">{html.escape(line[6:])}</p>'); continue
         if line.startswith("!key "):
-            flush(cap); out.append(f'<p class="key">{html.escape(line[5:])}</p>'); continue
+            flush(cap); out.append(f'<p class="key">{brs(line[5:])}</p>'); continue
         if line.startswith("!note "):
-            flush(cap); out.append(f'<p class="note">{html.escape(line[6:])}</p>'); continue
+            flush(cap); out.append(f'<p class="note">{brs(line[6:])}</p>'); continue
         if line.startswith("!rule "):
-            flush(cap); out.append(f'<p class="rule">{html.escape(line[6:])}</p>'); continue
+            flush(cap); out.append(f'<p class="rule">{brs(line[6:])}</p>'); continue
         if line.startswith("!sign "):
             flush(cap); out.append(f'<p class="sign">{html.escape(line[6:])}</p>'); continue
         if line == "---":
