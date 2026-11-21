@@ -1,0 +1,36 @@
+/* 全ページ共通デザイン。見た目を変えたいときはここだけ直す */
+:root{
+  --bg:#fbf8f6;
+  --text:#2a2326;
+  --muted:#8a7f84;
+  --accent:#8b2a4a;      /* ワインレッド */
+  --accent-soft:#f3e4ea;
+  --line:#e8dfe2;
+  --font:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);line-height:2;font-size:16px}
+.wrap{max-width:560px;margin:0 auto;padding:40px 20px 80px}
+h1{font-size:26px;line-height:1.6;margin:0 0 24px;letter-spacing:.02em}
+h2{font-size:20px;line-height:1.6;margin:56px 0 16px;padding-left:12px;border-left:3px solid var(--accent)}
+p{margin:0 0 1.6em}
+.lead{color:var(--muted);font-size:14px;margin-bottom:8px}
+.meta{color:var(--muted);font-size:13px;margin-bottom:32px}
+hr{border:0;border-top:1px solid var(--line);margin:40px 0}
+.box{background:var(--accent-soft);border-radius:10px;padding:20px 22px;margin:28px 0}
+.btn{display:block;text-align:center;background:var(--accent);color:#fff;text-decoration:none;
+  padding:18px 16px;border-radius:10px;font-weight:bold;font-size:17px;margin:32px 0}
+.btn:active{opacity:.85}
+.btn small{display:block;font-weight:normal;font-size:12px;opacity:.85;margin-top:4px}
+a{color:var(--accent)}
+.price{text-align:center;font-size:32px;font-weight:bold;color:var(--accent);margin:8px 0}
+.price s{font-size:16px;color:var(--muted);margin-right:8px}
+ul.check{list-style:none;padding:0;margin:0 0 1.6em}
+ul.check li{padding-left:1.6em;position:relative;margin-bottom:.6em}
+ul.check li::before{content:"✓";position:absolute;left:0;color:var(--accent)}
+.card{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);background:#fff;
+  border-radius:10px;padding:16px 18px;margin-bottom:12px}
+.card b{display:block;margin-bottom:4px}
+.card span{font-size:13px;color:var(--muted)}
+.foot{text-align:center;color:var(--muted);font-size:12px;margin-top:64px}
