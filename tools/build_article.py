@@ -16,7 +16,7 @@
   !key 一文              太字ワインレッドの強調行（ケイの一言・問いかけ）
   !note 一文             ボタン直前の小さな注記（「任意です」など）
   ::: tpl LINE用|場面 ... :::   テンプレカード（会話用なら「会話用|場面」）
-  [ボタン文言](URL)       ボタン
+  [ボタン文言](URL)       ボタン（URLを @day1 のように書くと src/forms.txt の day1=URL に置き換わる）
   !sign ケイ             右寄せ署名
   空行                   段落の区切り
 
@@ -129,7 +129,20 @@ def para(lines, cap, warns, cls=""):
     return "\n\n".join(out)
 
 
-def build(src, brand):
+def load_forms(path):
+    """原稿と同じフォルダの forms.txt（名前=URL を1行ずつ）を読む。ボタンのURLに @名前 と書くと置き換わる。"""
+    forms = {}
+    f = pathlib.Path(path).parent / "forms.txt"
+    if f.exists():
+        for ln in f.read_text().splitlines():
+            if "=" in ln and not ln.lstrip().startswith("#"):
+                k, _, v = ln.partition("=")
+                forms[k.strip()] = v.strip()
+    return forms
+
+
+def build(src, brand, forms=None):
+    forms = forms or {}
     warns, out, buf = [], [], []
     title = "無題"
     mode = None  # None | box | tpl
@@ -183,7 +196,12 @@ def build(src, brand):
         m = re.match(r"^\[(.+)\]\((.+)\)$", line)
         if m:
             flush(cap)
-            out.append(f'<a class="btn" href="{html.escape(m.group(2))}">{html.escape(m.group(1))}</a>')
+            url = m.group(2)
+            if url.startswith("@"):
+                if url[1:] not in forms:
+                    warns.append(f"forms.txt に {url[1:]} がありません")
+                url = forms.get(url[1:], "#")
+            out.append(f'<a class="btn" href="{html.escape(url)}">{html.escape(m.group(1))}</a>')
             if len(m.group(1)) > 14:
                 warns.append(f"ボタン文言が長い（折り返しの恐れ）: {m.group(1)}")
             continue
@@ -219,7 +237,7 @@ if __name__ == "__main__":
         i = a.index("--brand"); brand = a[i + 1]; del a[i:i + 2]
     if len(a) != 2:
         sys.exit(__doc__)
-    text, warns = build(pathlib.Path(a[0]).read_text(), brand)
+    text, warns = build(pathlib.Path(a[0]).read_text(), brand, load_forms(a[0]))
     pathlib.Path(a[1]).write_text(text)
     print(f"生成: {a[1]}")
     for w in warns:
