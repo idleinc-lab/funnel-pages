@@ -10,7 +10,11 @@
   !lead 小さなキャッチ    h1の上の薄字
   !rule 太字のルール見出し
   ---                    区切り線
-  ::: box ... :::        ピンクの枠
+  ::: box ... :::        ピンクの枠（話の転換・補足）
+  ::: box key ... :::    太字ワインレッドの強調枠（一番言いたい転換の一文）
+  ::: voice ... :::      ふきだし風の枠（周囲の声・本音・読者の心の声）
+  !key 一文              太字ワインレッドの強調行（ケイの一言・問いかけ）
+  !note 一文             ボタン直前の小さな注記（「任意です」など）
   ::: tpl LINE用|場面 ... :::   テンプレカード（会話用なら「会話用|場面」）
   [ボタン文言](URL)       ボタン
   !sign ケイ             右寄せ署名
@@ -87,8 +91,11 @@ def build(src, brand):
     for raw in src.splitlines():
         line = raw.rstrip()
         cap = BOX_CAP if mode else MAIN_CAP
+        if line.startswith("::: voice"):
+            flush(cap); mode = "box"; out.append('<div class="voice">'); continue
         if line.startswith("::: box"):
-            flush(cap); mode = "box"; out.append('<div class="box">'); continue
+            flush(cap); mode = "box"
+            out.append('<div class="box key">' if line.strip().endswith("key") else '<div class="box">'); continue
         if line.startswith("::: tpl"):
             flush(cap); mode = "tpl"
             head = line[7:].strip()
@@ -110,6 +117,10 @@ def build(src, brand):
             continue
         if line.startswith("!lead "):
             flush(cap); out.append(f'<p class="lead">{html.escape(line[6:])}</p>'); continue
+        if line.startswith("!key "):
+            flush(cap); out.append(f'<p class="key">{html.escape(line[5:])}</p>'); continue
+        if line.startswith("!note "):
+            flush(cap); out.append(f'<p class="note">{html.escape(line[6:])}</p>'); continue
         if line.startswith("!rule "):
             flush(cap); out.append(f'<p class="rule">{html.escape(line[6:])}</p>'); continue
         if line.startswith("!sign "):
