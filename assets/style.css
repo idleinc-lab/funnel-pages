@@ -3,9 +3,9 @@
   --bg:#fbf8f6;
   --text:#2a2326;
   --muted:#8a7f84;
-  --accent:#8b2a4a;      /* ワインレッド */
-  --accent-soft:#f3e4ea;
-  --line:#e8dfe2;
+  --accent:#b3122b;      /* 深紅（表紙画像の赤に合わせる） */
+  --accent-soft:#fbe9ea;
+  --line:#eadcdd;
   --font:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",sans-serif;
 }
 *{box-sizing:border-box}
