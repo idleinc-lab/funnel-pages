@@ -33,4 +33,12 @@ ul.check li::before{content:"✓";position:absolute;left:0;color:var(--accent)}
   border-radius:10px;padding:16px 18px;margin-bottom:12px}
 .card b{display:block;margin-bottom:4px}
 .card span{font-size:13px;color:var(--muted)}
+h3{font-size:17px;line-height:1.7;margin:44px 0 12px;color:var(--accent)}
+.tpl{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:0 0 14px}
+.tpl .tag{display:inline-block;font-size:12px;background:var(--accent);color:#fff;border-radius:4px;padding:0 8px;line-height:1.8;margin-bottom:6px}
+.tpl .tag.talk{background:#5c4a52}
+.tpl .when{font-size:13px;color:var(--muted);margin:0 0 6px}
+.tpl p:last-child{margin-bottom:0}
+.rule{font-weight:bold;margin:36px 0 8px}
+.sign{text-align:right;margin-top:40px}
 .foot{text-align:center;color:var(--muted);font-size:12px;margin-top:64px}
