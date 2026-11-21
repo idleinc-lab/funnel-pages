@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """スマホ専用の記事HTMLを一発生成する。
 
-使い方:  python3 tools/build_article.py 原稿.txt 出力名.html [--brand ケイ]
+使い方:  python3 tools/build_article.py 原稿.txt 出力名.html [--brand ケイ] [--cover assets/header-dayN.jpg]
 
 原稿の書き方（1行=1フレーズ。ここで区切った位置がそのまま改行になる）
   # タイトル             h1（「/」で意味のまとまりごとに改行。見出し・!key・!noteも同様）
@@ -215,7 +215,7 @@ def build(src, brand, forms=None):
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
 <title>{html.escape(title)}</title>
-<link rel="stylesheet" href="assets/style.css?v=4">
+<link rel="stylesheet" href="assets/style.css?v=5">
 </head>
 <body>
 <div class="wrap">
@@ -235,9 +235,14 @@ if __name__ == "__main__":
     brand = "ケイ"
     if "--brand" in a:
         i = a.index("--brand"); brand = a[i + 1]; del a[i:i + 2]
+    cover = None
+    if "--cover" in a:
+        i = a.index("--cover"); cover = a[i + 1]; del a[i:i + 2]
     if len(a) != 2:
         sys.exit(__doc__)
     text, warns = build(pathlib.Path(a[0]).read_text(), brand, load_forms(a[0]))
+    if cover:
+        text = text.replace("<h1>", f'<img class="cover" src="{cover}" alt="" width="1080" height="900">\n\n<h1 class="sr">', 1)
     pathlib.Path(a[1]).write_text(text)
     print(f"生成: {a[1]}")
     for w in warns:

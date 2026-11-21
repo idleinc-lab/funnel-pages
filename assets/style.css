@@ -53,3 +53,4 @@ p.key{font-weight:bold;color:var(--accent);font-size:calc(var(--fs)*1.0625);marg
 .foot{text-align:center;color:var(--muted);font-size:12px;margin-top:64px}
 
 .cover{display:block;width:calc(100% + 36px);max-width:none;height:auto;margin:-40px -18px 24px}
+.sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
