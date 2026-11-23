@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>事前審査｜認知・結婚まで進める可能性チェック</title>
+<style>
+:root{--wine:#8b2a4a;--wine-d:#6e1f3a;--bg:#fbf8f6;--ink:#2b2226;--sub:#7a6a70;--line:#e8dde0;--ok:#06c755}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:-apple-system,"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;line-height:1.8;line-break:strict;word-break:auto-phrase;min-height:100vh}
+.app{max-width:480px;margin:0 auto;padding:0 18px 56px;min-height:100vh}
+.scr{display:none;animation:in .35s ease}
+.scr.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h1,h2,h3,p{text-wrap:balance}
+/* top */
+.top{padding-top:44px;text-align:center}
+.badge{display:inline-block;font-size:12px;letter-spacing:.3em;color:var(--wine);border:1px solid var(--wine);padding:4px 14px 4px 18px;border-radius:2px}
+.top h1{margin-top:26px;font-size:24px;line-height:1.6;font-weight:800;color:var(--wine-d)}
+.top .sub{margin-top:20px;font-size:15px;color:var(--sub)}
+.cover{display:block;width:100%;border-radius:10px;margin-top:28px;box-shadow:0 8px 24px rgba(60,10,25,.25)}
+.btn{display:block;width:100%;border:0;border-radius:999px;background:var(--wine);color:#fff;font:inherit;font-size:17px;font-weight:800;padding:17px 12px;margin-top:28px;cursor:pointer;text-align:center;text-decoration:none;box-shadow:0 6px 16px rgba(139,42,74,.3)}
+.btn:active{transform:scale(.98)}
+.note{margin-top:14px;font-size:12px;color:var(--sub);text-align:center}
+/* quiz */
+.bar{position:sticky;top:0;background:var(--bg);padding:16px 0 10px;z-index:2}
+.bar .row{display:flex;justify-content:space-between;font-size:13px;color:var(--sub);font-weight:700}
+.track{height:6px;background:var(--line);border-radius:3px;margin-top:8px;overflow:hidden}
+.fill{height:100%;width:0;background:var(--wine);transition:width .35s}
+.q{margin-top:22px;font-size:19px;line-height:1.7;font-weight:800;color:var(--wine-d)}
+.hint{margin-top:6px;font-size:13px;color:var(--sub)}
+.opts{margin-top:22px;display:flex;flex-direction:column;gap:12px}
+.opt{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:16px 14px;font:inherit;font-size:15px;line-height:1.7;color:var(--ink);cursor:pointer}
+.opt .k{flex:none;width:26px;height:26px;border-radius:50%;background:#f3e9ec;color:var(--wine);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.opt.sel{border-color:var(--wine);background:#fbeef2}
+.opt.sel .k{background:var(--wine);color:#fff}
+.back{margin-top:22px;background:none;border:0;font:inherit;font-size:13px;color:var(--sub);text-decoration:underline;cursor:pointer}
+/* loading */
+.load{text-align:center;padding-top:30vh}
+.spin{width:44px;height:44px;border:4px solid var(--line);border-top-color:var(--wine);border-radius:50%;margin:0 auto 22px;animation:sp .9s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.load p{font-size:15px;color:var(--sub)}
+/* result */
+.res{padding-top:30px}
+.stamp{display:inline-block;font-size:13px;font-weight:800;letter-spacing:.15em;padding:5px 14px 5px 18px;border-radius:2px;color:#fff;background:var(--wine)}
+.stamp.warn{background:#b4442b}
+.stamp.off{background:#8a8085}
+.res h2{margin-top:16px;font-size:23px;line-height:1.55;font-weight:800;color:var(--wine-d)}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 16px;margin-top:20px;font-size:15px}
+.card h3{font-size:13px;letter-spacing:.12em;color:var(--wine);margin-bottom:8px}
+.card p+p{margin-top:12px}
+.card.risk{border-color:#e8c8c0;background:#fff8f6}
+.card.risk h3{color:#b4442b}
+.offer{margin-top:26px;text-align:center}
+.offer .lead{font-size:14px;color:var(--sub)}
+.line{background:var(--ok);box-shadow:0 6px 16px rgba(6,199,85,.3)}
+.ghost{background:#fff;color:var(--sub);border:1.5px solid var(--line);box-shadow:none;font-size:15px;font-weight:700}
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- トップ -->
+<section class="scr on" id="s-top">
+  <div class="top">
+    <span class="badge">事前審査</span>
+    <h1>あなたの恋は<br>「認知・結婚」まで進める？<br>それとも<br>「都合のいい女」で終わる？</h1>
+    <p class="sub">全5問、約30秒の事前審査です。<br>審査を通過した方に、<br>完全ロードマップをお渡しします。</p>
+    <img class="cover" src="assets/roadmap-cover.jpg" alt="完全ロードマップ">
+    <button class="btn" id="start">事前審査をスタートする</button>
+    <p class="note">選ぶだけ。タップで進みます。</p>
+  </div>
+</section>
+
+<!-- 質問 -->
+<section class="scr" id="s-q">
+  <div class="bar">
+    <div class="row"><span id="qn">1 / 5</span><span>事前審査</span></div>
+    <div class="track"><div class="fill" id="fill"></div></div>
+  </div>
+  <h2 class="q" id="qt"></h2>
+  <p class="hint" id="qh"></p>
+  <div class="opts" id="opts"></div>
+  <button class="back" id="back">ひとつ前に戻る</button>
+</section>
+
+<!-- ローディング -->
+<section class="scr" id="s-load">
+  <div class="load"><div class="spin"></div><p id="lt">あなたの回答から、<br>2人の関係性と今後のリスクを<br>分析しています…</p></div>
+</section>
+
+<!-- 結果 -->
+<section class="scr" id="s-res"><div class="res" id="res"></div></section>
+
+</div>
+
+<script>
+// ====== 設定 ======
+// LINE登録先（審査通過者にだけ表示）。タイプ別に計測したいときは、ここを別URLに差し替える。
+var LINE_URL = {
+  1: "https://line.me/R/ti/p/@055akgzh",
+  2: "https://line.me/R/ti/p/@055akgzh",
+  3: "https://line.me/R/ti/p/@055akgzh"
+};
+var LOAD_MS = 1500;
+
+var Q = [
+  {t:"現在の彼との関係は、どの段階ですか？", h:"いちばん近いものを選んでください",
+   o:[["まだ肉体関係はないが、強く惹かれ合っている",1],["すでに体の関係があり、定期的に会っている",2],["お互い「好き」「一緒にいたい」と言い合う深い関係",3]]},
+  {t:"彼との会話の中で、「将来のこと」や「子供」の話題は出ますか？", h:"彼の温度感を教えてください",
+   o:[["まったく出ない。避けられている気がする",1],["冗談交じりや、抽象的な未来の話なら出たことがある",2],["「いつか一緒になれたら」「子供がいたら」という話が出たことがある",3]]},
+  {t:"2人きりの時、彼はどれくらい理性を失っていますか？", h:"直感で選んでください",
+   o:[["いつも冷静で、大人の余裕を崩さない",1],["たまに余裕がなくなったり、甘えてきたりする",2],["理性が飛んだように強く求めてきたり、独占欲を見せてくる",3]]},
+  {t:"もし今、想定外の出来事（妊娠など）が起きたら、彼はどう動くと思いますか？", h:"正直なところで大丈夫です",
+   o:[["正直、逃げたり話し合いを避けたりする不安がある",1],["戸惑うとは思うが、向き合ってくれると信じたい",2],["責任を取る覚悟を持って動いてくれる確信がある",3]]},
+  {t:"あなたは今後、彼との関係をどうしたいですか？", h:"最後の質問です",
+   o:[["今のまま、都合のいい関係や癒やし枠で満足している",0],["できれば本命になりたいが、まだ迷いや怖さがある",2],["何が何でも彼の本能と責任感を動かし、認知・結婚まで辿り着きたい",4]]}
+];
+
+var R = {
+ 1:{stamp:"審査通過｜最優先ランク", cls:"", title:"認知略奪・達成圏内タイプ",
+    a:["彼の本能はかなり揺らいでいて、あなた自身の覚悟も決まっています。","あと一歩、正しい順番で仕掛けるだけで、認知・結婚まで現実が一気に動く状態です。"],
+    r:["ただし、最後の詰めを誤ると、男は保身に走ります。","ここまで来て逃げられるのは、いちばん避けたい結末です。"],
+    cta:"失敗ゼロでゴールまで辿り着くための完全ロードマップを、今すぐ受け取ってください。"},
+ 2:{stamp:"審査通過｜逆転ポテンシャル枠", cls:"", title:"あと一歩・戦略不足タイプ",
+    a:["彼の中に、あなたへの執着は芽生えています。","あとは、立場を動かすための戦略だけが足りていない状態です。"],
+    r:["今のまま受け身で待っていると、「都合のいい癒やし枠」のまま固定されてしまう危険なラインです。"],
+    cta:"立場を逆転させて、彼に家庭よりあなたを選ばせるための具体的な手順を、完全ロードマップにすべてまとめました。"},
+ 3:{stamp:"要警戒｜緊急改善枠", cls:"warn", title:"現状維持・逃避リスク高タイプ",
+    a:["厳しい現実をお伝えします。","今のまま感情だけで動くと、いざという時に彼に逃げられて、1人で泣くことになる可能性が高い状態です。"],
+    r:["放置すると、時間だけが過ぎて、選択肢が減っていきます。"],
+    cta:"それでも、正しい順番で彼の本能と責任感にスイッチを入れれば、関係は変えられます。まずは完全ロードマップで、やってはいけない行動と逆転の手順を確認してください。"},
+ 4:{stamp:"審査見送り", cls:"off", title:"今回は、お渡しの対象外です",
+    a:["今回の完全ロードマップは、本気で認知・結婚まで辿り着きたいと覚悟を決めた方に限ってお渡ししています。","いまのあなたには、まだ必要ないかもしれません。"],
+    r:[], cta:""}
+};
+
+var $ = function(id){return document.getElementById(id)};
+var ans = [], idx = 0, busy = false;
+
+function show(id){
+  var a = document.querySelectorAll(".scr");
+  for(var i=0;i<a.length;i++) a[i].classList.remove("on");
+  $(id).classList.add("on");
+  window.scrollTo(0,0);
+}
+
+function renderQ(){
+  var q = Q[idx];
+  $("qn").textContent = (idx+1)+" / "+Q.length;
+  $("fill").style.width = (idx/Q.length*100)+"%";
+  $("qt").textContent = q.t;
+  $("qh").textContent = q.h;
+  $("back").style.visibility = idx===0 ? "hidden" : "visible";
+  var box = $("opts"); box.innerHTML = "";
+  q.o.forEach(function(o,i){
+    var b = document.createElement("button");
+    b.className = "opt" + (ans[idx]===i ? " sel" : "");
+    b.innerHTML = '<span class="k">'+"ABC"[i]+'</span><span></span>';
+    b.lastChild.textContent = o[0];
+    b.onclick = function(){ pick(i,b); };
+    box.appendChild(b);
+  });
+}
+
+function pick(i,b){
+  if(busy) return; busy = true;
+  ans[idx] = i; b.classList.add("sel");
+  setTimeout(function(){
+    busy = false;
+    if(idx < Q.length-1){ idx++; renderQ(); window.scrollTo(0,0); }
+    else { $("fill").style.width = "100%"; finish(); }
+  }, 260);
+}
+
+function judge(){
+  var last = ans[4];
+  if(Q[4].o[last][1] === 0) return 4;
+  var total = 0;
+  for(var i=0;i<Q.length;i++) total += Q[i].o[ans[i]][1];
+  if(last === 2 && total >= 13) return 1;
+  if(total >= 9) return 2;
+  return 3;
+}
+
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+
+function finish(){
+  show("s-load");
+  var type = judge();
+  setTimeout(function(){ renderRes(type); }, LOAD_MS);
+}
+
+function renderRes(type){
+  var d = R[type], h = "";
+  h += '<span class="stamp '+d.cls+'">'+esc(d.stamp)+'</span>';
+  h += '<h2>'+esc(d.title)+'</h2>';
+  h += '<div class="card"><h3>診断結果</h3>'+d.a.map(function(t){return '<p>'+esc(t)+'</p>'}).join("")+'</div>';
+  if(d.r.length) h += '<div class="card risk"><h3>このまま放置すると</h3>'+d.r.map(function(t){return '<p>'+esc(t)+'</p>'}).join("")+'</div>';
+  if(type !== 4){
+    h += '<div class="offer"><p class="lead">'+esc(d.cta)+'</p>';
+    h += '<img class="cover" src="assets/roadmap-cover.jpg" alt="完全ロードマップ">';
+    h += '<a class="btn line" href="'+LINE_URL[type]+'">審査通過特典「完全ロードマップ」を<br>受け取る（LINEへ）</a>';
+    h += '<p class="note">LINEの友だち追加画面が開きます</p></div>';
+  } else {
+    h += '<div class="offer"><button class="btn ghost" id="again">最初の画面に戻る</button></div>';
+  }
+  $("res").innerHTML = h;
+  show("s-res");
+  var ag = $("again");
+  if(ag) ag.onclick = reset;
+}
+
+function reset(){ ans = []; idx = 0; show("s-top"); }
+
+$("start").onclick = function(){ ans = []; idx = 0; renderQ(); show("s-q"); };
+$("back").onclick = function(){ if(idx>0){ idx--; renderQ(); } };
+</script>
+</body>
+</html>
