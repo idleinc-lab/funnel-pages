@@ -101,9 +101,9 @@ h1,h2,h3,p{text-wrap:balance}
 // ====== 設定 ======
 // LINE登録先（審査通過者にだけ表示）。タイプ別に計測したいときは、ここを別URLに差し替える。
 var LINE_URL = {
-  1: "line://app/2012444435-QhR3Y0SH?ref=ninchi&account=2012444155",
-  2: "line://app/2012444435-QhR3Y0SH?ref=ninchi&account=2012444155",
-  3: "line://app/2012444435-QhR3Y0SH?ref=ninchi&account=2012444155"
+  1: "https://line.me/R/ti/p/@055akgzh",
+  2: "https://line.me/R/ti/p/@055akgzh",
+  3: "https://line.me/R/ti/p/@055akgzh"
 };
 var LOAD_MS = 1500;
 
@@ -204,7 +204,7 @@ function renderRes(type){
     h += '<div class="offer"><p class="lead">'+esc(d.cta)+'</p>';
     h += '<img class="cover" src="assets/roadmap-cover.jpg" alt="完全ロードマップ">';
     h += '<a class="btn line" href="'+LINE_URL[type]+'">審査通過特典「完全ロードマップ」を<br>受け取る（LINEへ）</a>';
-    h += '<p class="note">LINEの友だち追加画面が開きます</p></div>';
+    h += '<p class="note">友だち追加したら、トークで<br><strong>「ロードマップ」</strong>と送ってください。<br>送った瞬間に、特典が届きます。</p></div>';
   } else {
     h += '<div class="offer"><button class="btn ghost" id="again">最初の画面に戻る</button></div>';
   }
