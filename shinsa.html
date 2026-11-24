@@ -101,9 +101,9 @@ h1,h2,h3,p{text-wrap:balance}
 // ====== 設定 ======
 // LINE登録先（審査通過者にだけ表示）。タイプ別に計測したいときは、ここを別URLに差し替える。
 var LINE_URL = {
-  1: "https://line.me/R/ti/p/@055akgzh",
-  2: "https://line.me/R/ti/p/@055akgzh",
-  3: "https://line.me/R/ti/p/@055akgzh"
+  1: "https://line.me/R/oaMessage/@055akgzh/?%E3%83%AD%E3%83%BC%E3%83%89%E3%83%9E%E3%83%83%E3%83%97",
+  2: "https://line.me/R/oaMessage/@055akgzh/?%E3%83%AD%E3%83%BC%E3%83%89%E3%83%9E%E3%83%83%E3%83%97",
+  3: "https://line.me/R/oaMessage/@055akgzh/?%E3%83%AD%E3%83%BC%E3%83%89%E3%83%9E%E3%83%83%E3%83%97"
 };
 var LOAD_MS = 1500;
 
@@ -203,8 +203,8 @@ function renderRes(type){
   if(type !== 4){
     h += '<div class="offer"><p class="lead">'+esc(d.cta)+'</p>';
     h += '<img class="cover" src="assets/roadmap-cover.jpg" alt="完全ロードマップ">';
-    h += '<a class="btn line" href="'+LINE_URL[type]+'">審査通過特典「完全ロードマップ」を<br>受け取る（LINEへ）</a>';
-    h += '<p class="note">友だち追加したら、トークで<br><strong>「ロードマップ」</strong>と送ってください。<br>送った瞬間に、特典が届きます。</p></div>';
+    h += '<a class="btn line" href="'+LINE_URL[type]+'">審査通過特典「完全ロードマップ」を<br>受け取る（LINEを開く）</a>';
+    h += '<p class="note">LINEが開いたら、友だち追加をして、<br>入力欄にある<strong>「ロードマップ」</strong>をそのまま送信してください。<br>送った瞬間に、特典が届きます。</p></div>';
   } else {
     h += '<div class="offer"><button class="btn ghost" id="again">最初の画面に戻る</button></div>';
   }
